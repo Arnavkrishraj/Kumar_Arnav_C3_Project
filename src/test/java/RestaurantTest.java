@@ -3,6 +3,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -61,4 +63,40 @@ class RestaurantTest {
                 ()->restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+    //<<<<<<<<<<<<<<<<<<<<<<<TOTAL ORDER VALUE>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+//    when no item added for the order i.e. empty list is passed to the method
+//          The total order value should be 0
+//
+    @Test
+    public void when_no_item_is_added_in_the_order_then_the_total_order_value_should_be_0() {
+        List<String> itemsInOrder = new ArrayList<String>();
+        int totalOrderValue = restaurant.getTotalOrderValue(itemsInOrder);
+        assertEquals(0, totalOrderValue);
+    }
+
+
+//    when 1 item ("Sweet corn soup") is added for the order,
+//          The total order value should be 119 (as per the restaurant's menu)
+//              then remove the item to get the total order value as 0.qq1
+//
+    @Test
+    public void when_Sweet_corn_soup_item_is_added_in_the_order_then_the_total_order_value_should_be_119_and_on_removal_should_be_0() {
+        List<String> itemsInOrder = new ArrayList<String>();
+        itemsInOrder.add("Sweet corn soup");
+        int totalOrderValue = restaurant.getTotalOrderValue(itemsInOrder);
+        assertEquals(119, totalOrderValue);
+
+
+        itemsInOrder.remove("Sweet corn soup");
+        totalOrderValue = restaurant.getTotalOrderValue(itemsInOrder);
+        assertEquals(0, totalOrderValue);
+    }
+
+
+
+    //<<<<<<<<<<<<<<<<<<<<<<<TOTAL ORDER VALUE>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 }
